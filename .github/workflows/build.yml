@@ -2,18 +2,14 @@ name: Build APK
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: kivy/buildozer
     steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
+      - uses: actions/checkout@v4
+      - name: Build APK
         run: |
-          sudo apt update
-          sudo apt install -y openjdk-17-jdk python3-pip zip unzip
-          pip3 install --upgrade pip
-          pip3 install buildozer cython==0.29.33
-      - name: Build with Buildozer
-        run: |
-          yes | buildozer android debug
+          buildozer android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
