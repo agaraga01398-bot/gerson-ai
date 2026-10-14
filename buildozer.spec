@@ -1,4 +1,4 @@
-app]
+[app]
 title = Gerson AI Studio
 package.name = gersonaistudio
 package.domain = com.gerson.ai
