@@ -1,4 +1,4 @@
-[app]
+app]
 title = Gerson AI Studio
 package.name = gersonaistudio
 package.domain = com.gerson.ai
@@ -9,7 +9,7 @@ requirements = python3,kivy
 orientation = portrait
 
 [buildozer]
-log_level = 2
+log_level = 1
 
 [app:android]
 android.permissions = INTERNET
