@@ -1,0 +1,16 @@
+name: Build APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt update
+          sudo apt install -y openjdk-17-jdk zip
+          pip install buildozer cython
+          buildozer android debug
+      - uses: actions/upload-artifact@v3
+        with:
+          name: GersonAI-APK
+          path: bin/*.apk
