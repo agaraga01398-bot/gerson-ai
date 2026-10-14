@@ -2,15 +2,20 @@ name: Build APK
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: Install dependencies
+        run: |
           sudo apt update
-          sudo apt install -y openjdk-17-jdk zip
-          pip install buildozer cython
-          buildozer android debug
-      - uses: actions/upload-artifact@v3
+          sudo apt install -y openjdk-17-jdk python3-pip zip unzip
+          pip3 install --upgrade pip
+          pip3 install buildozer cython==0.29.33
+      - name: Build with Buildozer
+        run: |
+          yes | buildozer android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: GersonAI-APK
           path: bin/*.apk
